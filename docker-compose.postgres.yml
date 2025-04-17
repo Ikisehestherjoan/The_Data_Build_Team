@@ -1,0 +1,22 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      - POSTGRES_USER=mariam
+      - POSTGRES_PASSWORD=mariam123
+      - POSTGRES_DB=mydb
+    networks:
+      mynet:
+        aliases:
+          - my_localhost
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+networks:
+  mynet:
+    driver: bridge
+volumes:
+  postgres_data:
+    driver: local
