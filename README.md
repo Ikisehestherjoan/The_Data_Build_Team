@@ -16,7 +16,7 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 
 ## End to End Stock price Data Engineering Pipeline
 
-- <img
+<img
   src="https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg"
   alt="Alt text"
   title="Optional title"
