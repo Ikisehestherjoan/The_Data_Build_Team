@@ -1,7 +1,6 @@
 from datetime import datetime
 from dateutil.relativedelta import relativedelta
-from utility.minio_client_setup import set_up_minio
-from utility.auxiliary import get_current_file
+from utility.auxiliary import get_current_file,set_up_minio
 from utility.extract_data import get_data
 
 # Main function that combines all the steps
