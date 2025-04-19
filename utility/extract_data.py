@@ -1,7 +1,7 @@
 from dateutil.relativedelta import relativedelta
 import requests
 from datetime import datetime
-from utility.data_uploader import upload_to_minio
+from utility.data_loader import upload_to_minio
 
 
 # Function to get data from the api and pass to Minio
@@ -16,7 +16,7 @@ def get_data(base_url, client, bucket_name, company_name, start_date, end_date):
         end = datetime.strptime(end_date, "%Y-%m")
         
         if start > end:
-            raise ValueError("Start date must not be after end date.")
+            raise ValueError("Start date must be less than end date.")
 
         current = start
         while current <= end:

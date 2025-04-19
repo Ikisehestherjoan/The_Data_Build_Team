@@ -18,9 +18,10 @@ def get_stock_data(company_list, connection_str, access_key, secret_key, bucket_
     min_date, max_date = get_current_file(client, bucket_name)
 
     if min_date and max_date:
+
         # Convert tuples like (2023, 4) to datetime
-        min_date_obj = datetime(min_date[0], min_date[1], 1) - relativedelta(months=1)
-        max_date_obj = datetime(max_date[0], max_date[1], 1) + relativedelta(months=1)
+        min_date_obj = datetime(min_date[0], min_date[1], 1) - relativedelta(months=1) # Exlude existing min file
+        max_date_obj = datetime(max_date[0], max_date[1], 1)
 
         # Determine gaps before or after existing data
         if min_date_obj > start:
@@ -37,4 +38,3 @@ def get_stock_data(company_list, connection_str, access_key, secret_key, bucket_
         # No file exists, get full range for all companies
         for company_name in company_list:
             get_data(base_url, client, bucket_name, company_name, start_date, end_date)
-    return "Done!"

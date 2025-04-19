@@ -1,5 +1,5 @@
-import io
-from utility.auxiliary import load_data, set_up_minio
+from utility.auxiliary import set_up_minio
+from utility.data_loader import load_data
 from sqlalchemy import create_engine, inspect
 
 # Function to load the data into Postgres
@@ -19,8 +19,6 @@ def update_postgres(client, bucket_name, db_username,db_password,db_connection_s
 
     # Now append the data
     df.to_sql('stock_data', engine, if_exists='append', index=False)
-
-    return "Done"
 
 if __name__=="__main__":
     access_key="mariam"
