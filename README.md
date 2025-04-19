@@ -1,5 +1,4 @@
 # Stock Price Data Engineering Pipeline
-![alt text](
 <img
   src="https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg"
   alt="Alt text"
