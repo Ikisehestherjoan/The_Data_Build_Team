@@ -14,7 +14,7 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 
 - **API**: [Alpha Vantage](https://www.alphavantage.co)
 
-- ##End to End Stock price Data Engineering Pipeline
+## End to End Stock price Data Engineering Pipeline
 
 - <img
   src="https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg"
