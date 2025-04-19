@@ -52,4 +52,4 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 |GitHub            | For version control and collaboration |
 
 ## How to make use of the project
-** Link to medium article:
+** Link to medium article:**
