@@ -15,26 +15,24 @@ def get_stock_data(company_list, connection_str, access_key, secret_key, bucket_
     client = set_up_minio(connection_str, access_key, secret_key, bucket_name)
 
     # Get current data range if files already exist
-    min_date, max_date = get_current_file(client, bucket_name)
+    for company_name in company_list:
+        min_date, max_date = get_current_file(client, bucket_name,company_name)
+        
+        if min_date and max_date:
 
-    if min_date and max_date:
+            # Convert tuples like (2023, 4) to datetime
+            min_date_obj = datetime(min_date[0], min_date[1], 1) - relativedelta(months=1) # Exlude existing min file
+            max_date_obj = datetime(max_date[0], max_date[1], 1)
 
-        # Convert tuples like (2023, 4) to datetime
-        min_date_obj = datetime(min_date[0], min_date[1], 1) - relativedelta(months=1) # Exlude existing min file
-        max_date_obj = datetime(max_date[0], max_date[1], 1)
-
-        # Determine gaps before or after existing data
-        if min_date_obj > start:
-            new_end = min_date_obj.strftime("%Y-%m")
-            for company_name in company_list:
+            # Determine gaps before or after existing data
+            if min_date_obj > start:
+                new_end = min_date_obj.strftime("%Y-%m")
                 get_data(base_url, client, bucket_name, company_name, start_date, new_end)
 
-        if max_date_obj < end:
-            new_start = max_date_obj.strftime("%Y-%m")
-            for company_name in company_list:
+            if max_date_obj < end:
+                new_start = max_date_obj.strftime("%Y-%m")
                 get_data(base_url, client, bucket_name, company_name, new_start, end_date)
 
-    else:
-        # No file exists, get full range for all companies
-        for company_name in company_list:
+        else:
+            # No file exists, get full range for the companies
             get_data(base_url, client, bucket_name, company_name, start_date, end_date)

@@ -2,21 +2,35 @@ import os
 from minio import Minio
 
 # This return the maximum and minimum date of the existing/historical data
-def get_current_file(client,bucket_name):
+def get_current_file(client, bucket_name,company_name):
+    """
+    Return the earliest and latest (year, month) tuple from filenames in a MinIO bucket,
+    filtering out files smaller than 1KB.
+    """
 
-    # list out all the files in the bucket
-    objects = client.list_objects(bucket_name,recursive=True)
+    parsed_elements = []
 
-    # Extract the file names
-    file_names = [ os.path.basename(obj.object_name).split('.')[0] for obj in objects]
+    # List objects in the bucket
+    for obj in client.list_objects(bucket_name, prefix=f"{bucket_name}/{company_name}/",recursive=True):
+        try:
+            # Check size
+            if client.stat_object(bucket_name, obj.object_name).size / 1024 > 1:
 
-    # convert file name to a tuple (year,month)
-    parsed_elements = [tuple(map(int,item.split('-'))) for item in file_names]
+                # Extract base filename without extension
+                base_name = os.path.basename(obj.object_name).split('.')[0]
+                
+                # Parse year and month
+                parsed = tuple(map(int, base_name.split('-')))
+                parsed_elements.append(parsed)
 
-    # Return min and max (Year, month)
-    if not parsed_elements or not parsed_elements:
-        return ([],[])
-    return min(parsed_elements),max(parsed_elements)
+        except Exception as e:
+            print(f"Skipping file {obj.object_name}: {e}")
+
+    if not parsed_elements:
+        return ([], [])
+
+    return min(parsed_elements), max(parsed_elements)
+
 
 # Function to set up minio
 def set_up_minio(connection_str,access_key,secret_key, bucket_name):
