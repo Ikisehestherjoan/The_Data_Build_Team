@@ -1,9 +1,5 @@
 # Stock Price Data Engineering Pipeline
-<img
-  src="https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg"
-  alt="Alt text"
-  title="Optional title"
-  style="display: inline-block; margin: 0 auto; max-width: 300px">
+
 This project is an end-to-end data engineering and analytics pipeline that collects stock market data from a public API, cleans and transforms it, stores it in a PostgreSQL database, and visualizes insights using Power BI. It also includes an alert system to notify significant stock price changes or pipeline failures.
 
 ## Objective
@@ -17,6 +13,14 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 ## Data Source
 
 - **API**: [Alpha Vantage](https://www.alphavantage.co)
+
+- ##End to End Stock price Data Engineering Pipeline
+
+- <img
+  src="https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg"
+  alt="Alt text"
+  title="Optional title"
+  style="display: inline-block; margin: 0 auto; max-width: 300px">
 
 
 ## Key Features
