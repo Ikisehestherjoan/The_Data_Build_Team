@@ -1,5 +1,5 @@
 # Stock Price Data Engineering Pipeline
-
+https://github.com/Ikisehestherjoan/The_Data_Build_Team/blob/main/stock%20price%20pipeline%20architecture.jpeg
 This project is an end-to-end data engineering and analytics pipeline that collects stock market data from a public API, cleans and transforms it, stores it in a PostgreSQL database, and visualizes insights using Power BI. It also includes an alert system to notify significant stock price changes or pipeline failures.
 
 ## Objective
