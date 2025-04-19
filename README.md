@@ -50,3 +50,6 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 | Apache Airflow   |For orchestrating and scheduling pipeline tasks|
 |Power BI        | For visualizing market trends|
 |GitHub            | For version control and collaboration |
+
+## How to make use of the project
+** Link to medium article:
