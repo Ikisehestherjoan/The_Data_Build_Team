@@ -1,7 +1,7 @@
 services:
   postgres:
     image: postgres:latest
-    container_name: postgres
+    container_name: mypostgres
     environment:
       - POSTGRES_USER=mariam
       - POSTGRES_PASSWORD=mariam123
@@ -13,7 +13,7 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
     ports:
-      - "5432:5432"
+      - "5433:5432"
 networks:
   mynet:
     driver: bridge

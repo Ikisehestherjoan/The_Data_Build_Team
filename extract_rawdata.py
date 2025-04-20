@@ -1,11 +1,12 @@
+import os
 from utility.main import get_stock_data
 from datetime import datetime
 
 if __name__== "__main__":
     company_list = ['AAPL', 'IBM', 'MSFT']
-    connection_str = "localhost:9000"
-    access_key="mariam"
-    secret_key="mariam123"
+    connection_str = os.getenv("MINIO_CONNECTION_STRING")
+    access_key= os.getenv("STM_ACCESS_KEY")
+    secret_key= os.getenv("STM_SECRET_KEY")
     bucket_name = "stock-rawdata"
     start_date = '2023-01'
     end_date = datetime.now().strftime("%Y-%m")

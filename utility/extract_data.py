@@ -1,5 +1,6 @@
 from dateutil.relativedelta import relativedelta
 import requests
+import os
 from datetime import datetime
 from utility.data_loader import upload_to_minio
 
@@ -24,7 +25,7 @@ def get_data(base_url, client, bucket_name, company_name, start_date, end_date):
             params = {
                 'outputsize': 'full',
                 'extended_hours': 'false',
-                'apikey': 'IFBBUTAZ8NWO52MF',
+                'apikey': os.getenv("API_KEY"),
                 'interval': '60min',
                 'function': 'TIME_SERIES_INTRADAY',
                 'symbol': company_name,
