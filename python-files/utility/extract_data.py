@@ -4,7 +4,6 @@ import os
 from datetime import datetime
 from utility.data_loader import upload_to_minio
 
-
 # Function to get data from the api and pass to Minio
 def get_data(base_url, client, bucket_name, company_name, start_date, end_date):
     """

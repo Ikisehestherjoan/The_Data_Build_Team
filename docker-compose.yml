@@ -4,8 +4,8 @@ services:
     image: minio/minio
     container_name: minio
     environment:
-      - MINIO_ROOT_USER=userxxxxx
-      - MINIO_ROOT_PASSWORD=xxxxx123
+      - MINIO_ROOT_USER=${MINIO_ROOT_USER}
+      - MINIO_ROOT_PASSWORD=${MINIO_ROOT_PASSWORD}
       - MINIO_DEFAULT_BUCKETS=my-bucket
     command: server /data --console-address ":9001"
     ports:
@@ -16,18 +16,13 @@ services:
     networks:
       mynet:
 
- #   healthcheck:
- #     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
- #     interval: 30s
- #     timeout: 10s
- #     retries: 5
 
   postgres:
     image: postgres:latest
     container_name: mypostgres
     environment:
-      - POSTGRES_USER=userxxxxx
-      - POSTGRES_PASSWORD=xxxxx123
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
       - POSTGRES_DB=mydb
     ports:
       - "5433:5432"
@@ -36,11 +31,7 @@ services:
     networks:
       mynet:
 
- #   healthcheck:
- #     test: ["CMD", "pg_isready", "-U", "userxxxxx", "-d", "mydb"]
- #     interval: 30s
- #     timeout: 10s
- #     retries: 5
+
   pythonapp:
     build:
       context: ./python-files
@@ -51,12 +42,14 @@ services:
       - postgres
     networks:
       - mynet
+    env_file:
+      - ./.env
     environment:
       - MINIO_CONNECTION_STRING=minio:9000
-      - STM_ACCESS_KEY=userxxxxx
-      - STM_SECRET_KEY=xxxxx123
+     # - STM_ACCESS_KEY=${STM_ACCESS_KEY}
+     # - STM_SECRET_KEY=${STM_SECRET_KEY}
       - POSTGRES_CONNECTION_STRING=mypostgres:5432
-      - API_KEY=IFBBUTAZ8NWO52MF
+     # - API_KEY=${API_KEY}
     working_dir: /app
     command: tail -f /dev/null
 
@@ -65,12 +58,12 @@ services:
     container_name: airflow
     command: standalone
     environment:
-      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://userxxxxx:xxxxx123@mypostgres:5432/mydb
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=${AIRFLOW__DATABASE__SQL_ALCHEMY_CONN}
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - _AIRFLOW_WWW_USER_CREATE=True
-      - _AIRFLOW_WWW_USER_USERNAME=userxxxxx
-      - _AIRFLOW_WWW_USER_PASSWORD=xxxxx123
+      - _AIRFLOW_WWW_USER_USERNAME=${_AIRFLOW_WWW_USER_USERNAME}
+      - _AIRFLOW_WWW_USER_PASSWORD=${_AIRFLOW_WWW_USER_PASSWORD}
     volumes:
       - ./airflow-docker/dags:/opt/airflow/dags
       - ./airflow-docker/logs:/opt/airflow/logs

@@ -1,7 +1,7 @@
 import os
 from utility.auxiliary import set_up_minio
 from utility.data_loader import load_data
-from sqlalchemy import create_engine, inspect
+from sqlalchemy import create_engine
 
 # Function to load the data into Postgres
 def update_postgres(client, bucket_name, db_username,db_password,db_connection_str,db_name):
