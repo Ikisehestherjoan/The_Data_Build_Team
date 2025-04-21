@@ -1,14 +1,13 @@
 # Building an End-to-End Data Pipeline for Stock Price Analysis
 
-This project is an end-to-end data engineering and analytics pipeline that collects stock market data from a public API, cleans and transforms it, stores it in a PostgreSQL database, and visualizes insights using Power BI. It also includes an alert system to notify significant stock price changes or pipeline failures.
+This project is an end-to-end data engineering and analytics pipeline that collects stock market data from a public API, cleans and transforms it, stores it in a PostgreSQL database, and visualizes insights using Power BI.
 
 ## Objective
 
 - Collect stock market data for **IBM**, **Microsoft**, and **Apple** over a **2-year+ period**
 - Analyze market trends
 - Perform comparative analysis between the three companies
-- Automate the entire data pipeline with email alerts for critical events
-
+- Automate the entire data pipeline
 
 ## Data Source
 
@@ -35,8 +34,6 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 **Database Storage**: Loads processed data into a PostgreSQL database.
 
 **Visualization**: Creates interactive dashboards in Power BI to track market trends.
-
-**Alert System**: Sends email alerts for significant stock price changes and pipeline failures.
 
 **Containerization**: Encapsulates the pipeline in a Docker container for portability.
 
@@ -65,34 +62,14 @@ Once the project is pushed to GitHub, setting it up to run on your local machine
 First, you'll need to clone the repository to your local machine using Git. Open your terminal and run the following command:
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
-cd your-repo-name
+git clone https://github.com/Ikisehestherjoan/The_Data_Build_Team.git
+cd The_Data_Build_Team
 ```
 
 ---
 
-#### **2. Set Up Python Environment**
-This project relies on Python for data extraction, cleaning, and transformation. It's a good idea to create a virtual environment to keep dependencies organized. Run these commands:
 
-```bash
-# Create a virtual environment
-python3 -m venv venv
-
-# Activate the virtual environment
-# On Windows
-venv\Scripts\activate
-# On macOS/Linux
-source venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
-```
-
-The `requirements.txt` file should contain all the necessary libraries like `pandas`, `requests`, `sqlalchemy`, etc.
-
----
-
-#### **3. Docker Setup for MinIO**
+#### **2. Docker Setup for MinIO**
 If you haven’t used MinIO before, we recommend setting it up using Docker. MinIO will store the raw data. Here’s how to run it locally:
 
 ```bash
