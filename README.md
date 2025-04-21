@@ -80,7 +80,7 @@ _AIRFLOW_WWW_USER_PASSWORD=xxxxx123
 AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:yourpassword@mypostgres:5432/mydb
 ```
 
-#### **2. Run Docker Container Build**
+#### **2. Run Docker Compose Build to Setup the required services**
 
 ```bash
 # create MinIO, Postgres, Airflow and custom python service
