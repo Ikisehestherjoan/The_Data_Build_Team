@@ -143,4 +143,4 @@ Feel free to fork the repository, contribute to the project, or reach out if you
 ---
 
 ## Kindly read up on 
-Medium ** :[Link to medium article]:(https://medium.com/@ikisehestherjoan/building-an-end-to-end-data-pipeline-for-stock-price-analysis-877fb14d948d)
+- ** Medium **:[Link to medium article].(https://medium.com/@ikisehestherjoan/building-an-end-to-end-data-pipeline-for-stock-price-analysis-877fb14d948d)
