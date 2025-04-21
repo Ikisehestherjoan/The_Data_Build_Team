@@ -36,6 +36,7 @@ services:
     build:
       context: ./python-files
       dockerfile: Dockerfile
+    image: my-python-app:latest
     container_name: pythonapp
     depends_on:
       - minio
