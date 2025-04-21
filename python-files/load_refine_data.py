@@ -16,12 +16,12 @@ def update_postgres(client, bucket_name, db_username,db_password,db_connection_s
     df.to_sql('stock_data', engine, if_exists='replace', index=False)
 
 if __name__=="__main__":
-    access_key= os.getenv("STM_ACCESS_KEY")
-    secret_key= os.getenv("STM_SECRET_KEY")
+    access_key= os.getenv("MINIO_ROOT_USER")
+    secret_key= os.getenv("MINIO_ROOT_PASSWORD")
     bucket_name = "stock-rawdata"
     connection_str = os.getenv("MINIO_CONNECTION_STRING")
-    db_username= os.getenv("STM_ACCESS_KEY")
-    db_password= os.getenv("STM_SECRET_KEY")
+    db_username= os.getenv("POSTGRES_USER")
+    db_password= os.getenv("POSTGRES_PASSWORD")
     db_connection_str= os.getenv("POSTGRES_CONNECTION_STRING")
     db_name= "mydb"
     client = set_up_minio(connection_str, access_key, secret_key, bucket_name)

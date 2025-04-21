@@ -6,8 +6,8 @@ if __name__ == "__main__":
     company_list = ['AAPL', 'IBM', 'MSFT']
     
     connection_str = os.getenv("MINIO_CONNECTION_STRING")
-    access_key = os.getenv("STM_ACCESS_KEY")
-    secret_key = os.getenv("STM_SECRET_KEY")
+    access_key = os.getenv("MINIO_ROOT_USER")
+    secret_key = os.getenv("MINIO_ROOT_PASSWORD")
     
     bucket_name = "stock-rawdata"
     start_date = '2023-01'

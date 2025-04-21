@@ -47,10 +47,7 @@ services:
       - ./.env
     environment:
       - MINIO_CONNECTION_STRING=minio:9000
-     # - STM_ACCESS_KEY=${STM_ACCESS_KEY}
-     # - STM_SECRET_KEY=${STM_SECRET_KEY}
       - POSTGRES_CONNECTION_STRING=mypostgres:5432
-     # - API_KEY=${API_KEY}
     working_dir: /app
     command: tail -f /dev/null
 
