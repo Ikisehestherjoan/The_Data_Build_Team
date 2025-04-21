@@ -69,81 +69,62 @@ cd The_Data_Build_Team
 ---
 
 
-#### **2. Docker Setup for MinIO**
-If you haven’t used MinIO before, we recommend setting it up using Docker. MinIO will store the raw data. Here’s how to run it locally:
+#### **2. Run Docker Container Build**
 
 ```bash
-# Pull the MinIO Docker image
-docker pull minio/minio
+# Pull the MinIO, Postgres, Airflow image
+docker-compose up --build -d
 
-# Run MinIO container (this will run MinIO locally on port 9000)
-docker run -p 9000:9000 -e "MINIO_ACCESS_KEY=minioadmin" -e "MINIO_SECRET_KEY=minioadmin" minio/minio server /data
+# Apache Airflow Setup Initialize and start Airflow
+
+airflow db init
+airflow webserver &
+airflow scheduler &
 ```
 
 After running this, you can access the MinIO web interface at `http://localhost:9000` using the credentials `minioadmin:minioadmin`.
 
 ---
 
-#### **4. PostgreSQL Setup**
-Next, set up a PostgreSQL database where the processed data will be stored. You can use Docker to run a PostgreSQL container:
-
-```bash
-# Pull the PostgreSQL Docker image
-docker pull postgres
-
-# Run PostgreSQL container (this will run PostgreSQL locally on port 5432)
-docker run -p 5432:5432 -e POSTGRES_PASSWORD=yourpassword -e POSTGRES_DB=financial_data postgres
-```
-
-You can connect to the PostgreSQL database using a tool like **pgAdmin** or **psql** to ensure the setup is correct.
+#### **3. Power BI Dashboard**
+Connect Power BI to Postgres
 
 ---
 
-#### **5. Apache Airflow Setup**
-Apache Airflow is used for orchestration and scheduling. Set up Airflow on your local machine or a server. For local setups:
-
-```bash
-# Install Apache Airflow
-pip install apache-airflow
-
-# Initialize the Airflow database
-airflow db init
-
-# Start the Airflow web server
-airflow webserver --port 8080
-
-# Start the Airflow scheduler in another terminal window
-airflow scheduler
-```
-
-Visit `http://localhost:8080` to access the Airflow web UI.
-
 ---
 
-#### **6. Configuring API Keys**
-To fetch stock data from Alpha Vantage, you will need an API key. Sign up for a free account on [Alpha Vantage](https://www.alphavantage.co/support/#api-key) and get your key. Once you have it, store it in an `.env` file for security and load it in your Python scripts using `python-dotenv`.
+#### **6. Configuring API Keys and setting up environment variables**
+To fetch stock data from Alpha Vantage, you will need an API key. Sign up for a free account on [Alpha Vantage](https://www.alphavantage.co/support/#api-key) and get your key. Once you have it, store it in an `.env` file for security
 
 Example `.env` file:
 
 ```
 ALPHA_VANTAGE_API_KEY=your_api_key_here
+POSTGRES_USER=userxxxxx
+POSTGRES_PASSWORD=xxxxx123
+MINIO_ROOT_USER=userxxxxx
+MINIO_ROOT_PASSWORD=xxxxx123
+STM_ACCESS_KEY=userxxxxx
+STM_SECRET_KEY=xxxxx123
+_AIRFLOW_WWW_USER_USERNAME=userxxxxx
+_AIRFLOW_WWW_USER_PASSWORD=xxxxx123
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://userxxxxx:xxxxx123@mypostgres:5432/mydb
 ```
 
 ---
 
 #### **7. Running the Pipeline**
-Once all dependencies are installed and your environment is set up, you can run the entire pipeline using Apache Airflow or manually through Python scripts.
+Once your environment is set up, the pipeline was scheduled to run everyday at 8am. You can run the entire pipeline using Apache Airflow webserver or manually through Python scripts.
 
 To manually run the data extraction and loading, you can execute:
 
 ```bash
-python extract_data.py  # Pulls data from Alpha Vantage
-python transform_data.py  # Cleans and transforms data
-python load_data.py  # Loads data into PostgreSQL
+docker exec -it pythonapp python extract_rawdata.py  # extract data from Alpha Vantage and store in MinIO
+docker exec -it pythonapp python load_refine_data.py  # transform the data and Load into PostgreSQL
 ```
 
 If you prefer to use Airflow, trigger the appropriate DAG from the Airflow UI to automate the process.
-
+The mane of the dag is 'python_task_dag'
 ---
 
 #### **8. Visualizing the Data**
@@ -153,6 +134,10 @@ Once the data is loaded into PostgreSQL, you can use **Power BI** or other visua
 
 #### **9. Troubleshooting**
 - If you encounter errors with **MinIO** or **PostgreSQL**, check the container logs for any issues.
+  ```bash
+docker logs airflow  # check airflow logs 
+
+```
 - If there are issues with **API limits** from Alpha Vantage, try spreading out the requests over multiple days or use multiple API keys.
 
 ---
