@@ -67,54 +67,46 @@ cd The_Data_Build_Team
 ```
 
 ---
+#### **2. Create a .env file with the following variables
 
+```
+ALPHA_VANTAGE_API_KEY=your_api_key_here
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=yourpassword
+MINIO_ROOT_USER=miniouser
+MINIO_ROOT_PASSWORD=miniopassword
+STM_ACCESS_KEY=userxxxxx
+STM_SECRET_KEY=xxxxx123
+_AIRFLOW_WWW_USER_USERNAME=userxxxxx
+_AIRFLOW_WWW_USER_PASSWORD=xxxxx123
+AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:yourpassword@mypostgres:5432/mydb
+```
 
 #### **2. Run Docker Container Build**
 
 ```bash
-# Pull the MinIO, Postgres, Airflow image
-docker-compose up --build -d
+# create MinIO, Postgres, Airflow and custom python service
+docker-compose -f docker-compose.yml up --build -d
 
+```
+#### **3. Apache Airflow Setup Initialize**
+
+```bash
 # Apache Airflow Setup Initialize and start Airflow
 
 airflow db init
 airflow webserver &
 airflow scheduler &
-```
-
-After running this, you can access the MinIO web interface at `http://localhost:9000` using the credentials `minioadmin:minioadmin`.
-
----
-
-#### **3. Power BI Dashboard**
-Connect Power BI to Postgres
-
----
-
----
-
-#### **6. Configuring API Keys and setting up environment variables**
-To fetch stock data from Alpha Vantage, you will need an API key. Sign up for a free account on [Alpha Vantage](https://www.alphavantage.co/support/#api-key) and get your key. Once you have it, store it in an `.env` file for security
-
-Example `.env` file:
 
 ```
-ALPHA_VANTAGE_API_KEY=your_api_key_here
-POSTGRES_USER=userxxxxx
-POSTGRES_PASSWORD=xxxxx123
-MINIO_ROOT_USER=userxxxxx
-MINIO_ROOT_PASSWORD=xxxxx123
-STM_ACCESS_KEY=userxxxxx
-STM_SECRET_KEY=xxxxx123
-_AIRFLOW_WWW_USER_USERNAME=userxxxxx
-_AIRFLOW_WWW_USER_PASSWORD=xxxxx123
-AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://userxxxxx:xxxxx123@mypostgres:5432/mydb
-```
+
+After running this, you can access the MinIO web interface at `http://localhost:9000` using the credentials created in the `.env` file
+
 
 ---
 
 #### **7. Running the Pipeline**
-Once your environment is set up, the pipeline was scheduled to run everyday at 8am. You can run the entire pipeline using Apache Airflow webserver or manually through Python scripts.
+Once your environment is set up, the pipeline has been scheduled to run everyday at 8am. You can run the entire pipeline manually using Apache Airflow webserver or manually through Python scripts.
 
 To manually run the data extraction and loading, you can execute:
 
@@ -123,8 +115,8 @@ docker exec -it pythonapp python extract_rawdata.py  # extract data from Alpha V
 docker exec -it pythonapp python load_refine_data.py  # transform the data and Load into PostgreSQL
 ```
 
-If you prefer to use Airflow, trigger the appropriate DAG from the Airflow UI to automate the process.
-The mane of the dag is 'python_task_dag'
+If you prefer to use Airflow webserver, trigger the appropriate DAG from the Airflow UI to automate the process.
+The name of the dag is 'python_task_dag'
 ---
 
 #### **8. Visualizing the Data**
