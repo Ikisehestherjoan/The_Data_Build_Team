@@ -115,7 +115,7 @@ docker exec -it pythonapp python load_refine_data.py  # transform the data and L
 
 If you prefer to use Airflow webserver, trigger the appropriate DAG from the Airflow UI to automate the process.
 The name of the dag is 'python_task_dag'
----
+
 
 #### **5. Visualizing the Data**
 Once the data is loaded into PostgreSQL, you can use **Power BI** or other visualization tools to create interactive dashboards. Connect Power BI to the PostgreSQL database using the PostgreSQL connector, and query the relevant data to build your visualizations.
