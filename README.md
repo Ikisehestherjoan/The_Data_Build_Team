@@ -80,10 +80,10 @@ _AIRFLOW_WWW_USER_PASSWORD=xxxxx123
 AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:yourpassword@mypostgres:5432/mydb
 ```
 
-#### **2. Run Docker Compose Build to Setup the required services**
+#### **2. Run Docker Compose Build to Setup the Required Services**
 
 ```bash
-# create MinIO, Postgres, Airflow and custom python service
+# creates MinIO, Postgres, Airflow and custom python services
 docker-compose -f docker-compose.yml up --build -d
 
 ```
@@ -103,7 +103,7 @@ After running this, you can access the MinIO web interface at `http://localhost:
 
 ---
 
-#### **7. Running the Pipeline**
+#### **4. Running the Pipeline**
 Once your environment is set up, the pipeline has been scheduled to run everyday at 8am. You can run the entire pipeline manually using Apache Airflow webserver or manually through Python scripts.
 
 To manually run the data extraction and loading, you can execute:
@@ -117,12 +117,12 @@ If you prefer to use Airflow webserver, trigger the appropriate DAG from the Air
 The name of the dag is 'python_task_dag'
 ---
 
-#### **8. Visualizing the Data**
+#### **5. Visualizing the Data**
 Once the data is loaded into PostgreSQL, you can use **Power BI** or other visualization tools to create interactive dashboards. Connect Power BI to the PostgreSQL database using the PostgreSQL connector, and query the relevant data to build your visualizations.
 
 ---
 
-#### **9. Troubleshooting**
+#### **6. Troubleshooting**
 - If you encounter errors with **MinIO**, check the container logs for any issues.
   ```bash
   docker logs airflow  # check airflow logs 
