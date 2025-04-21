@@ -54,8 +54,6 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 
 ### 🚀 How to Set Up & Run the Project
 
-Once the project is pushed to GitHub, setting it up to run on your local machine or server involves several steps. Here's a detailed guide for anyone who wants to replicate the project:
-
 ---
 
 #### **1. Clone the GitHub Repository**
