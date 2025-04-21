@@ -1,0 +1,94 @@
+
+services:
+  minio:
+    image: minio/minio
+    container_name: minio
+    environment:
+      - MINIO_ROOT_USER=userxxxxx
+      - MINIO_ROOT_PASSWORD=xxxxx123
+      - MINIO_DEFAULT_BUCKETS=my-bucket
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    volumes:
+      - minio_data:/data
+    networks:
+      mynet:
+
+ #   healthcheck:
+ #     test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/ready"]
+ #     interval: 30s
+ #     timeout: 10s
+ #     retries: 5
+
+  postgres:
+    image: postgres:latest
+    container_name: mypostgres
+    environment:
+      - POSTGRES_USER=userxxxxx
+      - POSTGRES_PASSWORD=xxxxx123
+      - POSTGRES_DB=mydb
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      mynet:
+
+ #   healthcheck:
+ #     test: ["CMD", "pg_isready", "-U", "userxxxxx", "-d", "mydb"]
+ #     interval: 30s
+ #     timeout: 10s
+ #     retries: 5
+  pythonapp:
+    build:
+      context: ./python-files
+      dockerfile: Dockerfile
+    container_name: pythonapp
+    depends_on:
+      - minio
+      - postgres
+    networks:
+      - mynet
+    environment:
+      - MINIO_CONNECTION_STRING=minio:9000
+      - STM_ACCESS_KEY=userxxxxx
+      - STM_SECRET_KEY=xxxxx123
+      - POSTGRES_CONNECTION_STRING=mypostgres:5432
+      - API_KEY=IFBBUTAZ8NWO52MF
+    working_dir: /app
+    command: tail -f /dev/null
+
+  airflow:
+    image: apache/airflow:2.7.0
+    container_name: airflow
+    command: standalone
+    environment:
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://userxxxxx:xxxxx123@mypostgres:5432/mydb
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+      - _AIRFLOW_WWW_USER_CREATE=True
+      - _AIRFLOW_WWW_USER_USERNAME=userxxxxx
+      - _AIRFLOW_WWW_USER_PASSWORD=xxxxx123
+    volumes:
+      - ./airflow-docker/dags:/opt/airflow/dags
+      - ./airflow-docker/logs:/opt/airflow/logs
+      - ./airflow-docker/plugins:/opt/airflow/plugins
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - mynet
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+
+networks:
+  mynet:
+    driver: bridge
+
+volumes:
+  minio_data:
+  postgres_data:
+
+
