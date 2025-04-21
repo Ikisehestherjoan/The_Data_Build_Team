@@ -133,10 +133,9 @@ Once the data is loaded into PostgreSQL, you can use **Power BI** or other visua
 ---
 
 #### **9. Troubleshooting**
-- If you encounter errors with **MinIO** or **PostgreSQL**, check the container logs for any issues.
+- If you encounter errors with **MinIO**, check the container logs for any issues.
   ```bash
-docker logs airflow  # check airflow logs 
-
+  docker logs airflow  # check airflow logs 
 ```
 - If there are issues with **API limits** from Alpha Vantage, try spreading out the requests over multiple days or use multiple API keys.
 
