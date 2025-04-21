@@ -104,7 +104,7 @@ After running this, you can access the MinIO web interface at `http://localhost:
 ---
 
 #### **4. Running the Pipeline**
-Once your environment is set up, the pipeline has been scheduled to run everyday at 8am. You can run the entire pipeline manually using Apache Airflow webserver or manually through Python scripts.
+Once your environment is set up, the pipeline has been scheduled to run everyday at 8am. You can run the entire pipeline manually using Apache Airflow webserver `http://localhost:8080/` or manually through Python scripts.
 
 To manually run the data extraction and loading, you can execute:
 
