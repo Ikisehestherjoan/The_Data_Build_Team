@@ -98,7 +98,7 @@ airflow scheduler &
 
 ```
 
-After running this, you can access the MinIO web interface at `http://localhost:9000` using the credentials created in the `.env` file
+After running this, you can access the MinIO web interface at `http://localhost:9001` using the credentials created in the `.env` file
 
 
 ---
