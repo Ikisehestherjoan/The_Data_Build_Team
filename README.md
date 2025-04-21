@@ -4,7 +4,7 @@ This project is an end-to-end data engineering and analytics pipeline that colle
 
 ## Objective
 
-- Collect stock market data for **IBM**, **Microsoft**, and **Apple** over a **5-year period**
+- Collect stock market data for **IBM**, **Microsoft**, and **Apple** over a **2-year+ period**
 - Analyze market trends
 - Perform comparative analysis between the three companies
 - Automate the entire data pipeline with email alerts for critical events
