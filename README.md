@@ -118,7 +118,7 @@ The name of the dag is 'python_task_dag'
 
 
 #### **5. Visualizing the Data**
-Once the data is loaded into PostgreSQL, you can use **Power BI** or other visualization tools to create interactive dashboards. Connect Power BI to the PostgreSQL database using the PostgreSQL connector, and query the relevant data to build your visualizations.
+Once the data is loaded into PostgreSQL, you can use **Power BI** or other visualization tools to create interactive dashboards. Connect Power BI to the PostgreSQL database using the PostgreSQL connector provided in the `.env` file, and query the stock_data table to build your visualizations.
 
 ---
 
