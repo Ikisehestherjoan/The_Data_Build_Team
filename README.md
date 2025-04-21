@@ -135,13 +135,14 @@ Once the data is loaded into PostgreSQL, you can use **Power BI** or other visua
 After following these steps, you should have the entire pipeline running locally. You can modify the DAGs in Airflow, tweak the transformation logic in Python, or create custom dashboards in Power BI.
 
 Feel free to fork the repository, contribute to the project, or reach out if you encounter any issues!
-**https://github.com/Titilopemigift**
-**https://github.com/motunrayom**
-**https://github.com/Ikisehestherjoan**
-**https://github.com/Data-dv**
+
+- **https://github.com/Titilopemigift**
+- **https://github.com/motunrayom**
+- **https://github.com/Ikisehestherjoan**
+- **https://github.com/Data-dv**
 
 ---
 
 ## Kindly read up on
 
-- ** Medium **:[Link to medium](https://medium.com/@ikisehestherjoan/building-an-end-to-end-data-pipeline-for-stock-price-analysis-877fb14d948d)
+- [Medium](https://medium.com/@ikisehestherjoan/building-an-end-to-end-data-pipeline-for-stock-price-analysis-877fb14d948d)
