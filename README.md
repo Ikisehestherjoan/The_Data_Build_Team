@@ -64,10 +64,9 @@ git clone https://github.com/Ikisehestherjoan/The_Data_Build_Team.git
 cd The_Data_Build_Team
 ```
 
----
-#### **2. Create a .env file with the following variables
+#### **2. Create a .env file with the following variables**
 
-```
+```bash
 ALPHA_VANTAGE_API_KEY=your_api_key_here
 POSTGRES_USER=postgres
 POSTGRES_PASSWORD=yourpassword
@@ -78,16 +77,17 @@ STM_SECRET_KEY=xxxxx123
 _AIRFLOW_WWW_USER_USERNAME=userxxxxx
 _AIRFLOW_WWW_USER_PASSWORD=xxxxx123
 AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://postgres:yourpassword@mypostgres:5432/mydb
+
 ```
 
-#### **2. Run Docker Compose Build to Setup the Required Services**
+#### **3. Run Docker Compose Build to Setup the Required Services**
 
 ```bash
 # creates MinIO, Postgres, Airflow and custom python services
 docker-compose -f docker-compose.yml up --build -d
 
 ```
-#### **3. Apache Airflow Setup Initialize**
+#### **4. Apache Airflow Setup Initialize**
 
 ```bash
 # Apache Airflow Setup Initialize and start Airflow
@@ -103,7 +103,7 @@ After running this, you can access the MinIO web interface at `http://localhost:
 
 ---
 
-#### **4. Running the Pipeline**
+#### **5. Running the Pipeline**
 Once your environment is set up, the pipeline has been scheduled to run everyday at 8am. You can run the entire pipeline manually using Apache Airflow webserver or manually through Python scripts.
 
 To manually run the data extraction and loading, you can execute:
@@ -117,19 +117,19 @@ If you prefer to use Airflow webserver, trigger the appropriate DAG from the Air
 The name of the dag is 'python_task_dag'
 
 
-#### **5. Visualizing the Data**
+#### **6. Visualizing the Data**
 Once the data is loaded into PostgreSQL, you can use **Power BI** or other visualization tools to create interactive dashboards. Connect Power BI to the PostgreSQL database using the PostgreSQL connector provided in the `.env` file, and query the stock_data table to build your visualizations.
 
 ---
 
-#### **6. Troubleshooting**
+#### **7. Troubleshooting**
 - If you encounter errors with **MinIO**, check the container logs for any issues.
   ```bash
   docker logs airflow  # check airflow logs 
-```
-- If there are issues with **API limits** from Alpha Vantage, try spreading out the requests over multiple days or use multiple API keys.
 
----
+If there are issues with **API limits** from Alpha Vantage, try spreading out the requests over multiple days or use multiple API keys.
+
+
 
 ### 🔄 Final Notes
 After following these steps, you should have the entire pipeline running locally. You can modify the DAGs in Airflow, tweak the transformation logic in Python, or create custom dashboards in Power BI.
@@ -141,7 +141,6 @@ Feel free to fork the repository, contribute to the project, or reach out if you
 * **https://github.com/Ikisehestherjoan**
 * **https://github.com/Data-dv**
 
----
 
-## Kindly read up on 
+## **Kindly read up on:
 [Link to medium article](https://medium.com/@ikisehestherjoan/building-an-end-to-end-data-pipeline-for-stock-price-analysis-877fb14d948d)
